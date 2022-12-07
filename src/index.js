@@ -1,15 +1,22 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import { legacy_createStore as createStore, applyMiddleware } from 'redux';
+import { searchRobots } from './reducers';
+import { createLogger } from 'redux-logger';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './containers/App';
 import reportWebVitals from './reportWebVitals';
 import 'tachyons';
 
+const logger = createLogger();
+const store = createStore(searchRobots, applyMiddleware(logger));
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
