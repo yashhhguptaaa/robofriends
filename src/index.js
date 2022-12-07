@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { legacy_createStore as createStore, applyMiddleware } from 'redux';
 import { searchRobots } from './reducers';
 import { createLogger } from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './containers/App';
@@ -10,7 +11,7 @@ import reportWebVitals from './reportWebVitals';
 import 'tachyons';
 
 const logger = createLogger();
-const store = createStore(searchRobots, applyMiddleware(logger));
+const store = createStore(searchRobots, applyMiddleware(thunkMiddleware, logger));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
